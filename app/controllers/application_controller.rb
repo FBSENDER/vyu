@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     user_agent = request.headers["HTTP_USER_AGENT"]
     user_agent.present? && user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook|UCWEB|Mobile)\b/i
   end
+  def redirect_pc_to_mobile
+    if request.host == 'www.vxixi.com' && is_device_mobile?
+      redirect_to "http://m.vxixi.com#{request.path}"
+    end
+  end
   def not_found
     raise ActionController::RoutingError.new('NOT FOUND')
   end

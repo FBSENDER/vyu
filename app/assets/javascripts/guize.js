@@ -1,6 +1,7 @@
 function guize(){
   if($(".guize").length <= 0)
     return;
+  $("a:eq(0)").remove();
   document.addEventListener('turbolinks:before-visit', function(e) {
     var source_href = window.location.href.split('#')[0];
     if (e.data.url.split(source_href)[1].length > 0) {
