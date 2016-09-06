@@ -32,4 +32,16 @@ s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&app
 h.insertBefore(s,h.firstChild);
 window.SCS_NO_IFRAME = true;
 setTimeout(function(){$("#adv").parents("div").addClass("hidden");}, 5000);
-})()
+})();
+
+(function(){
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fdf2a7189158cc645d90f29f95e975e4a' type='text/javascript'%3E%3C/script%3E"));
+})();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-45497874-1', 'vxixi.com');
+ga('send', 'pageview');
