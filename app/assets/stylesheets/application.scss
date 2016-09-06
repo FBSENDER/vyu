@@ -1,0 +1,58 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  position: relative;
+};
+
+.header-nav{
+  background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+  background-repeat: repeat-x;
+  border: 1px solid #d4d4d4;
+}
+
+.right-float{
+  position: absolute;
+}
+
+#doc-sidebar{
+  li{
+    margin-top: -1px;
+  };
+  li:first-child > a {
+    border-radius: 6px 6px 0 0;
+  };
+  li:last-child > a {
+    border-radius: 0 0 6px 6px;
+  };
+  li > a{
+    border: 1px solid #e5e5e5;
+    border-radius: 0 0 0 0;
+  };
+  li.active > a{
+    background-color: #08c;
+    border: 1px solid #08c;
+  }
+}
+
+#guize_content{
+  section{ padding-top: 20px; };
+  h1{ color: #cb1c22; };
+  h2{ color: #cb1c22; };
+  p{
+    font-size: 16px;
+    line-height: 200%;
+  }
+};
+
+#toTop {
+  width:45px;
+  border:1px solid #ccc;
+  text-align:center;
+  position:fixed; /* this is the magic */
+  bottom:30px; /* together with this to put the div at the bottom*/
+  right:50px;
+  cursor:pointer;
+  display:none;
+  font-size:20px;
+}
