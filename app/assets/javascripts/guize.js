@@ -12,12 +12,16 @@ function guize(){
   $(window).scroll(function(){
     var $ul = $('#doc-sidebar ul')
     if($(this).scrollTop() > 80){
-      if($ul.css('top') != '20px')
-    $ul.animate({top: "20px"},0);
+      if($ul.css('top') != '20px'){
+        $ul.animate({top: "20px"},0);
+        $('#bt_logo').removeClass('hide');
+        $('#bt_logo').fadeIn("slow");
+      }
     }
     else{
       if($ul.css('top') == '20px'){
         $ul.animate({top: "72px"},0);
+        $('#bt_logo').fadeOut("slow");
       }
     };
     if($(this).scrollTop() != 0) {
