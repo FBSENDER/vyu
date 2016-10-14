@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root "guize#yumaoqiu"
   get "/article/:id", to: "article#show"
   get "/article/:id/update", to: "article#update"
+  post "/article/publish", to: "article#publish"
 end
