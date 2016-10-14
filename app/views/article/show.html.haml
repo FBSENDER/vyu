@@ -13,7 +13,7 @@
         - elsif content["type"] == 2
           %p.desc #{content["text_content"]}
         - elsif content["type"] == 1
-          %img.img-responsive.center-block{src: "http://www.vxixi.com/proxy/#{URI.encode(content["image_url"].gsub('http://',''))}", alt: "#{content['image_desc']}"}
+          %img.lazy.img-responsive.center-block{data: {original: "http://www.vxixi.com/proxy/#{URI.encode(content["image_url"].gsub('http://',''))}"}, alt: "#{content['image_desc']}", src: ""}
           - unless content['image_desc'].empty?
             %br
             %p.small.text-center 
