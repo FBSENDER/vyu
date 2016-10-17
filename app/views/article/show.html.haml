@@ -5,10 +5,10 @@
 %section.container
   .row
     .col-md-2
-      .affix
+      .affix{style: "word-wrap: break-word; width: 160px;"}
         #bt_logo
           %a{href: "http://www.ibantang.com", title: "发现值得买", target: "_blank"}
-            %img.img-rounded{style: "width: 150px;padding-top:5px", src: "http://www.vxixi.com/bt_logo.jpg", alt:"半糖"}
+            %img{style: "width: 150px;padding-top:5px", src: "http://www.vxixi.com/bt_logo.jpg", alt:"半糖"}
         %br
         - @articles.each do |article|
           %p.small
