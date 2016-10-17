@@ -18,6 +18,7 @@
 
 $(document).on("turbolinks:load", function(){
   guize();
+  article();
 });
 
 (function(){
