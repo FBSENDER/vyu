@@ -15,7 +15,7 @@ class ArticleController < ApplicationController
     not_found if @article.nil?
     @path = "#{request.path}/"
     @contents = JSON.parse(@article.article_content)
-    @articles = Article.select(:id,:title).sample(5)
+    @articles = Article.where(status: 1).select(:id,:title).sample(10)
   end
   def publish
     @article = Article.where(id: params[:id].to_i).take
@@ -26,7 +26,8 @@ class ArticleController < ApplicationController
     if params[:anhao] == 'buyaole'
       @article.status = 9
       @article.save
-      render :json => {code: 2}
+      id = Article.where("id > ? and status = 0", params[:id].to_i).order(:id).take.id
+      render :json => {code: 2, id: id}
       return
     end
     if params[:anhao] != 'mingyue3000li'

@@ -4,31 +4,37 @@
 
 %section.container
   .row
-    %article.col-md-9.col-sm-12
+    .col-md-2
+      .affix
+        #bt_logo
+          %a{href: "http://www.ibantang.com", title: "发现值得买", target: "_blank"}
+            %img.img-rounded{style: "width: 150px;padding-top:5px", src: "http://www.vxixi.com/bt_logo.jpg", alt:"半糖"}
+        %br
+        - @articles.each do |article|
+          %p.small
+            %a{href: "/article/#{article.id}/"} #{article.title}
+    %article.col-md-8.col-sm-12
       - @contents.each do |content|
         - if content["type"] == 11
-          %h1.title.page_header #{content["h1_content"]}
+          %h1.page-header #{content["h1_content"]}
+          %p.small #{@article.description}
         - elsif content["type"] == 12
-          %h2.title #{content["h2_content"]}
+          %h2.page-header #{content["h2_content"]}
         - elsif content["type"] == 2
           %p.desc #{content["text_content"]}
         - elsif content["type"] == 1
-          .row
+          .row{style: "margin-bottom: 15px"}
             .col-md-8.col-md-offset-2.col-sm-12.col-xs-12
               %img.img-responsive.center-block{src: "http://www.vxixi.com/proxy/#{URI.encode(content["image_url"].gsub('http://',''))}", alt: "#{content['image_desc']}", style: "width: 100%"}
-          - unless content['image_desc'].empty?
-            %br
-            %p.small.text-center 
-              %span.glyphicon.glyphicon-minus
-              #{content['image_desc']}
+              - unless content['image_desc'].empty?
+                %br
+                %p.small.text-center 
+                  %span.glyphicon.glyphicon-minus
+                  #{content['image_desc']}
       #toTop ^
       .page-header
       #SOHUCS
       .page-header
 
-    %aside.col-md-3.col-sm-12
-      .row
-        %h3.title.page-header 更多文章
-        - @articles.each do |article|
-          %p
-            %a{href: "/article/#{article.id}/"} #{article.title}
+    %aside
+      = render partial: "layouts/ad_right" 

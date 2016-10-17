@@ -41,15 +41,13 @@ body {
   }
 }
 
-#guize_content{
-  section{ padding-top: 20px; };
-  h1{ color: #cb1c22; };
-  h2{ color: #cb1c22; };
-  p{
-    font-size: 16px;
-    line-height: 200%;
-  }
-};
+section{ padding-top: 20px; };
+h1{ color: #cb1c22; };
+h2{ color: #cb1c22; };
+p{
+  font-size: 16px;
+  line-height: 200%;
+}
 
 #toTop {
   width:45px;
@@ -73,6 +71,6 @@ body {
 }
 
 .desc {
-  padding: 6px 20px 0 0;
-  line-height: 26px;
+  font-size: 16px;
+  line-height: 200%;
 }

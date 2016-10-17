@@ -613,7 +613,7 @@ ArticleUtil.publish = function(){
                 window.location.href = '/article/'+data.id+'/';
             }
             else if(data.code == 2){
-                window.location.href = '/';
+                window.location.href = '/article/'+data.id+'/update/';
             }
             else{
                 alert(data.msg);
