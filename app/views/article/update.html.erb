@@ -610,7 +610,7 @@ ArticleUtil.publish = function(){
         success:function(data){
             if(data.code == 1){
                 ArticleUtil.deleteJSON();
-                window.location.href = '/article/'+data.id;
+                window.location.href = '/article/'+data.id+'/';
             }
             else if(data.code == 2){
                 window.location.href = '/';
@@ -799,7 +799,8 @@ ArticleUtil.publish = function(){
           $('body').on('keydown',function(e){
               var keycode = e.keyCode;
               var se = $(e.target);
-              if(keycode == 8 && !session.is('textarea') && !session.is('input')){
+              //if(keycode == 8 && !session.is('textarea') && !session.is('input')){
+              if(keycode == 8 && !se.is('textarea') && !se.is('input')){
               e.preventDefault();
               }
               });
