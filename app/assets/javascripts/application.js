@@ -19,21 +19,23 @@
 $(document).on("turbolinks:load", function(){
   guize();
   article();
+  (function(){
+    var appid = 'cyrtgVHP2';
+    var conf = 'prod_60051f90ec47ba299643a1e1c83a5ae8';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};
+    if(width < 960){
+      $("#changyan_mobile_js").attr("src","http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cyrtgVHP2&conf=prod_60051f90ec47ba299643a1e1c83a5ae8&rrr=" + Math.random().toString());
+      window.changyan = void 0;
+      window.cyan = void 0;
+    }
+    else{
+      loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      window.changyan = void 0;
+      window.cyan = void 0;
+    }
+  })();
 });
-
-(function(){
-  var appid = 'cyrtgVHP2',
-  conf = 'prod_60051f90ec47ba299643a1e1c83a5ae8';
-var doc = document,
-  s = doc.createElement('script'),
-  h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
-s.type = 'text/javascript';
-s.charset = 'utf-8';
-s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
-h.insertBefore(s,h.firstChild);
-window.SCS_NO_IFRAME = true;
-setTimeout(function(){$("#adv").parents("div").addClass("hidden");}, 5000);
-})();
 
 (function(){
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
