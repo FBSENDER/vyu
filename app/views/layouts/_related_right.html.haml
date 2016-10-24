@@ -4,7 +4,8 @@
       %a{href: "http://ai.taobao.com/search/index.htm?key=%E7%BE%BD%E6%AF%9B%E7%90%83%E6%8B%8D&pid=mm_32854514_4324027_21350252", rel: "nofollow", target: "_blank"}
         %img{style: "width: 200px;padding-top:5px", src: "http://www.vxixi.com/gaoxiao_shouye.gif", alt:"羽毛球最新比赛规则"}
     - if @articles && @articles.size > 0
-      %p 羽毛球比赛技巧文章
+      %p 
+        %a{href: "/article/"} 羽毛球比赛技巧文章
       - @articles.each do |article|
         %p.small
           %a{href: "/article/#{article.id}/"} #{article.title}
