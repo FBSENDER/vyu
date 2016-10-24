@@ -1,0 +1,27 @@
+- title "羽毛球技巧_战术_单打_双打gif"
+- keywords "羽毛球技巧,羽毛球发球技巧,羽毛球双打技巧,羽毛球单打技巧,羽毛球步伐,羽毛球扣杀技巧,羽毛球战术"
+- head_desc "羽毛球新手如何提升自己的羽毛球技巧？这里汇集了羽毛球方方面面的技巧、战术、注意事项，每日有更新呦，欢迎广大羽毛球爱好者来查看与留言。"
+
+%section.container
+  .row
+    %article.col-md-10
+      %h1.title.hide 羽毛球技巧
+      - @articles.each do |article|
+        .row
+          .col-md-4
+            %a{href: "/article/#{article.id}/", title: "#{article.title}"}
+              - if @is_robot
+                %img.img-responsive.img-rounded{src: "http://www.vxixi.com/proxy/#{article.img_url.sub('http://','')}", alt: "#{article.title}", style:"margin-top:25px"}
+              - else
+                %img.img-responsive.img-rounded.lazy{data: {original: "http://www.vxixi.com/proxy/#{article.img_url.sub('http://','')}"}, alt: "#{article.title}", style:"margin-top:25px", src: ""}
+          .col-md-8
+            %a{href: "/article/#{article.id}/", title: "#{article.title}"}
+              %h2.title #{article.title}
+              %p.content #{article.description}
+      #toTop ^
+      .page-header
+      #SOHUCS
+      .page-header
+
+    %aside
+      = render partial: "layouts/ad_right" 

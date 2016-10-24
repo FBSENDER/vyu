@@ -13,4 +13,5 @@ function article(){
   $('#toTop').click(function() {
     $('body,html').animate({scrollTop:0},800);
   });
+  $('img.lazy').lazyload({threshold: 200, effect: "fadeIn"});
 };

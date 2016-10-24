@@ -1,4 +1,8 @@
 class ArticleController < ApplicationController
+  def index
+    @articles = Article.where(status: 1).select(:id,:title,:description,:img_url).to_a
+    @is_robot = is_robot?
+  end
   def edit
   end
   def update
@@ -16,6 +20,7 @@ class ArticleController < ApplicationController
     @path = "#{request.path}/"
     @contents = JSON.parse(@article.article_content)
     @articles = Article.where(status: 1).select(:id,:title).sample(10)
+    @is_robot = is_robot?
   end
   def publish
     @article = Article.where(id: params[:id].to_i).take
@@ -42,6 +47,8 @@ class ArticleController < ApplicationController
     @article.img_url = data["content_list"].select{|item| item["type"] == 1}.first["image_url"]
     @article.article_content = data["content_list"].to_json
     @article.save
-    render :json => {code: 1, id: @article.id}
+    id = Article.where("id > ? and status = 0", params[:id].to_i).order(:id).take.id
+    render :json => {code: 2, id: id}
+    #render :json => {code: 1, id: @article.id}
   end
 end
