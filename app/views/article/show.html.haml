@@ -37,6 +37,14 @@
                 %p.small.text-center 
                   %span.glyphicon.glyphicon-minus
                   #{content['image_desc']}
+      .page-header
+      %p.desc
+        - if @pre
+          %a{href: "/article/#{@pre.id}/"} 上一篇：#{@pre.title}
+          %br
+        - if @next
+          %a{href: "/article/#{@next.id}/"} 下一篇：#{@next.title}
+
       #toTop ^
       .page-header
       #SOHUCS

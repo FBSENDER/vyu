@@ -19,8 +19,11 @@ class ArticleController < ApplicationController
     not_found if @article.nil?
     @path = "#{request.path}/"
     @contents = JSON.parse(@article.article_content)
-    @articles = Article.where(status: 1).select(:id,:title).sample(10)
+    s =  Article.where(status: 1).select(:id,:title).to_a
+    @articles = s.sample(10)
     @is_robot = is_robot?
+    @next = s.select{|item| item.id > @article.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = s.select{|item| item.id < @article.id}.sort{|a,b| b.id <=> a.id}.first
   end
   def publish
     @article = Article.where(id: params[:id].to_i).take
