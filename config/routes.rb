@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get "/article/:id", to: "article#show"
   get "/article/:id/update", to: "article#update"
   post "/article/publish", to: "article#publish"
+
+  get "/app/video", to: "app#video"
 end
