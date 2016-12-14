@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   post "/article/publish", to: "article#publish"
 
   get "/app/video", to: "app#video"
+  get "/app/tag/:name", to: "app#tag"
+
+  get "/app/article_list", to: "app#article_list"
+  get "/app/content/:id", to: "app#content"
 end

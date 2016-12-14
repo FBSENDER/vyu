@@ -1,0 +1,19 @@
+- items.each do |item|
+  .sale_item
+    %a{href: "#{item['coupon_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
+      .sale_cover
+        %img.img-responsive.lazy{data: {original: "#{item['product_pic']}"}, src: ""}
+    %a{href: "#{item['coupon_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
+      .sale_info
+        %p.sale_title #{item['product_name']}
+        %p.sale_stat
+          %span.sale_origin-price #{item['price']}
+          %span.sale_desc #{item['coupon_info']}
+        .sale_price
+          %span.sale_quan 用券后
+          %span.sale_number-font #{item['price_pay']}
+          %span.sale_button 立即领取
+
+#scrolling.hide
+  .pagination
+    %a{rel: "next", href: "#{request.path}?page=#{(params[:page].to_i || 0) + 1}&keyword=#{params[:keyword]}"}

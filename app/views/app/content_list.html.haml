@@ -1,0 +1,7 @@
+- title @title
+
+.container
+  .row
+    #content_list.col-sm-12.col-xs-12
+      .split
+      = render partial: "content_list", locals: {contents: @contents}

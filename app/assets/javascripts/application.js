@@ -25,12 +25,26 @@ $(document).on("turbolinks:load", function(){
   else{
     video();
   }
-});
+  if($("#content_list").size() > 0){
+    $(window).on("scroll", function(){
+      var more_products_url = $('.pagination a[rel=next]').attr('href');
+      if(more_products_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
+        $('.pagination').html('');
+        $.ajax({
+          url: more_products_url,
+          success: function(data){
+            $("#content_list").append(data);
+            $('img.lazy[src=""]').lazyload({threshold: 200, effect: "fadeIn"});
+          }
 
-(function(){
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fdf2a7189158cc645d90f29f95e975e4a' type='text/javascript'%3E%3C/script%3E"));
-})();
+        });
+      }
+      if(!more_products_url){
+        $('.pagination').html('');
+      }
+    });
+  }
+});
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

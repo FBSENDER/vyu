@@ -1,0 +1,36 @@
+- contents.each do |content|
+  - unless @is_ipad
+    %p
+      %a{href: "/app/content/#{content.id}/"} #{content.title}
+    %p
+      %small
+        - if content.type_id == 0
+          %span.label.label-success.tag-label 文章
+        - if content.type_id == 1
+          %span.label.label-warning.tag-label 视频
+        - content.tags.split(',').each do |tag|
+          %span.label.label-info.tag-label
+            %a{href: "/app/tag/#{URI.encode(tag)}/"} #{tag}
+  - else
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .col-md-3
+          %a{href: "/app/content/#{content.id}/", title: "#{content.title}"}
+            .article_cover{style: "background-image:url(http://www.vxixi.com/proxy/#{content.img_url.sub('http://','')});"}
+        .col-md-9
+          %a{href: "/app/content/#{content.id}/", title: "#{content.title}"}
+            %p.list_title #{content.title}
+          %a{href: "/app/content/#{content.id}/", title: "#{content.title}"}
+            %p.desc{style: "color:black"} #{content.description}
+          %p.desc
+            - content.tags.split(',').each do |t|
+              %span.label.label-info.pull-right.tag-label
+                %a{href: "/app/tag/#{URI.encode(t)}/",style: "color:white"} #{t}
+            - if content.type_id == 0
+              %span.label.label-success.tag-label.pull-right 文章
+            - if content.type_id == 1
+              %span.label.label-warning.tag-label.pull-right 视频
+
+  .split
+#scrolling.hide
+  = will_paginate(contents)
