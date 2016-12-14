@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('NOT FOUND')
   end
+  def is_ipad?
+    user_agent = request.headers["HTTP_USER_AGENT"]
+    user_agent.present? && user_agent =~ /(ipad)/i
+  end
 end
