@@ -34,49 +34,6 @@ class AppController < ApplicationController
     end
     render "content_list"
   end
-  def article_news
-    @articles = Article.where(category_id: 2, status: 1).select(:id,:title,:tags,:img_url,:description).order("id desc").paginate(page: params[:page])
-    @path = request.fullpath
-    @is_ipad = is_ipad?
-    if request.xhr?
-      render partial: "article_list", locals: {articles: @articles}
-      return 
-    end
-    render "article_list"
-  end
-  def article_wenda
-    @articles = Article.where(category_id: 3, status: 1).select(:id,:title,:tags,:img_url,:description).order("id desc").paginate(page: params[:page])
-    @path = request.fullpath
-    @is_ipad = is_ipad?
-    if request.xhr?
-      render partial: "article_list", locals: {articles: @articles}
-      return 
-    end
-    render "article_list"
-  end
-  def card_ssr
-    @cards = Card.where(level: 'ssr').select(:id,:img_url,:name)
-    render "card_list"
-  end
-  def card_sr
-    @cards = Card.where(level: 'sr').select(:id,:img_url,:name)
-    render "card_list"
-  end
-  def card_r
-    @cards = Card.where(level: 'r').select(:id,:img_url,:name)
-    render "card_list"
-  end
-  def card
-    @card = Card.where(id: params[:id].to_i).take
-    not_found if @card.nil?
-    @juexing = JSON.parse(@card.juexing_json)
-    @skill = JSON.parse(@card.skill_json)
-    @team = JSON.parse(@card.team_json)
-    @suit = JSON.parse(@card.suit_json)
-    @path = request.fullpath
-    @next = Card.where("id > ?", @card.id).order("id").take
-    @pre = Card.where("id < ?", @card.id).order("id desc").take
-  end
   def hot
     @path = request.fullpath
     @tags = ArticleTag.pluck(:name).sample(25)
@@ -84,41 +41,49 @@ class AppController < ApplicationController
   def jubao
   end
 
-  def sale_list(sort_type)
-    data = get_sale_json(sort_type, params[:page] || 0, params[:keyword] || '')
-    @items = data["data"]["list"]
+  def tbk_list(fav_id)
+    data = get_tbk_uatm_json(fav_id, (params[:page] || 0).to_i)
+    @items = data["tbk_uatm_favorites_item_get_response"]["results"]["uatm_tbk_item"]
     @title ="值得买"
     @path = request.fullpath
     if request.xhr?
-      render partial: "sale_list", locals: {items: @items}
+      render partial: "tbk_list", locals: {items: @items}
       return 
     end
-    render "/app/sale_list"
+    render "/app/tbk_list"
   end
 
-  def sale_new
-    sale_list(1)
+  def sale_pai
+    tbk_list(2322121)
   end
-  def sale_xiaoliang
-    sale_list(6)
+  def sale_xie
+    tbk_list(2322124)
   end
-  def sale_youhui
-    sale_list(5)
+  def sale_qiu
+    tbk_list(2322133)
   end
-  def sale_jiage
-    sale_list(4)
+  def sale_haocai
+    tbk_list(2322128)
   end
   def sale_search
-    sale_list(1)
+    data = get_tbk_search_json(params[:keyword], (params[:page] || 0).to_i)
+    @items = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+    @title ="值得买"
+    @path = request.fullpath
+    if request.xhr?
+      render partial: "tbk_list", locals: {items: @items}
+      return 
+    end
+    render "/app/tbk_list"
   end
 
-  def get_sale_json(sort_type = 1, page = 0, keyword = '')
-    url = "http://m.bantangapp.com/activity/event/list?sort_type=#{sort_type}&page=#{page}&pagesize=20&&app_id=5&v=1&keyword=#{keyword}"
-    data =JSON.parse(Net::HTTP.get(URI(URI.encode(url))))
-    data
+  def get_tbk_uatm_json(fav_id = 1,page_no)
+    tbk = Tbkapi::Taobaoke.new
+    JSON.parse(tbk.taobao_tbk_uatm_favorites_item_get(fav_id,68494758,'ymqapp','23487656','bd2e9dc09968be2b011cdf3ad13360cd',2,page_no + 1,20))
   end
 
-  def download
-    redirect_to "http://www.yysssr.com"
+  def get_tbk_search_json(keyword, page_no)
+    tbk = Tbkapi::Taobaoke.new
+    JSON.parse(tbk.taobao_tbk_item_get(keyword, '23487656','bd2e9dc09968be2b011cdf3ad13360cd',page_no + 1,20))
   end
 end

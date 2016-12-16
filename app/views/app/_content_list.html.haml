@@ -2,7 +2,7 @@
   - unless @is_ipad
     %p
       %a{href: "/app/content/#{content.id}/"} #{content.title}
-    %p
+    %p.text-right
       %small
         - if content.type_id == 0
           %span.label.label-success.tag-label 文章
