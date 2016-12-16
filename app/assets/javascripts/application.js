@@ -26,6 +26,9 @@ $(document).on("turbolinks:load", function(){
   else{
     video();
   }
+  if($("#need_taobao_convert_url").size() > 0){
+    taodianjin(window,document);
+  }
   if($("#content_list").size() > 0){
     $(window).on("scroll", function(){
       var more_products_url = $('.pagination a[rel=next]').attr('href');

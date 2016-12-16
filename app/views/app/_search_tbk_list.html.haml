@@ -1,0 +1,18 @@
+- items.each do |item|
+  .sale_item
+    %a{href: "#{item['item_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"', isconvert: "1"}
+      .sale_cover
+        %img.img-responsive.lazy{data: {original: "#{item['pict_url']}"}, src: ""}
+    %a{href: "#{item['item_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"', isconvert: "1"}
+      .sale_info
+        %p.sale_title #{item['title']}
+        %p.sale_stat
+          %span.sale_origin-price #{item['reserve_price']}
+        .sale_price
+          %span.sale_quan 福利价
+          %span.sale_number-font #{item['zk_final_price_wap']}
+          %span.sale_button 立即购买
+
+#scrolling.hide
+  .pagination
+    %a{rel: "next", href: "#{request.path}?page=#{(params[:page].to_i || 0) + 1}"}

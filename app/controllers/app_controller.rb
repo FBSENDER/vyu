@@ -66,15 +66,18 @@ class AppController < ApplicationController
     tbk_list(2322128)
   end
   def sale_search
-    data = get_tbk_search_json(params[:keyword], (params[:page] || 0).to_i)
+    data = get_tbk_search_json(params[:keyword].strip, (params[:page] || 0).to_i)
+    p data
     @items = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+    @keyword = params[:keyword].strip
+    p @keyword
     @title ="值得买"
     @path = request.fullpath
     if request.xhr?
-      render partial: "tbk_list", locals: {items: @items}
+      render partial: "search_tbk_list", locals: {items: @items}
       return 
     end
-    render "/app/tbk_list"
+    render "/app/search_tbk_list"
   end
 
   def get_tbk_uatm_json(fav_id = 1,page_no)
