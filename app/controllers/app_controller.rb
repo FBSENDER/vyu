@@ -67,10 +67,8 @@ class AppController < ApplicationController
   end
   def sale_search
     data = get_tbk_search_json(params[:keyword].strip, (params[:page] || 0).to_i)
-    p data
     @items = data["tbk_item_get_response"]["results"]["n_tbk_item"]
     @keyword = params[:keyword].strip
-    p @keyword
     @title ="值得买"
     @path = request.fullpath
     if request.xhr?
