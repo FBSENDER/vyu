@@ -17,4 +17,4 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 gem 'will_paginate', '~> 3.1.0'
-gem 'tbkapi'
+gem 'tbkapi', '0.0.5'
