@@ -11,4 +11,10 @@ Rails.application.routes.draw do
 
   get "/app/article_list", to: "app#article_list"
   get "/app/content/:id", to: "app#content"
+
+  get "/app/sale_pai", to: "app#sale_pai"
+  get "/app/sale_xie", to: "app#sale_xie"
+  get "/app/sale_qiu", to: "app#sale_qiu"
+  get "/app/sale_haocai", to: "app#sale_haocai"
+  get "/app/sale_search/:keyword", to: "app#sale_search"
 end
