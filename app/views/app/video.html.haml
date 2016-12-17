@@ -1,4 +1,24 @@
-.container
-  .col-sm-12.col-xs-12
-    #ykplayer0
-      %input#vid{value: "XMTg2MDUwMzU1Ng=="}
+- title(@video.title)
+
+%section.container
+  .row
+    %article.col-sm-12.col-xs-12
+      %h3.page-header #{@video.title}
+      - @contents.each do |content|
+        - if content["type"] == 88
+          #ykplayer0
+            %input#vid{value: "#{content['vid']}"}
+    %aside.col-sm-12.col-xs-12
+      .split
+      %p.content.text-right
+        - @video.tags.split(',').each do |t|
+          %span.label.label-info.tag-label
+            %a{href: "/app/tag/#{URI.encode(t)}/",style: "color:white"} #{t}
+      %p.content
+        - if @pre
+          %a{href: "/app/content/#{@pre.id}/?isFirst=0"} 上一篇：#{@pre.title}
+          %br
+        - if @next 
+          %a{href: "/app/content/#{@next.id}/?isFirst=0"} 下一篇：#{@next.title}
+      .split
+      = render partial: "/app/footer_yindaopinglun"

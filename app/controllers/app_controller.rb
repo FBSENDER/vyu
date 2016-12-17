@@ -17,15 +17,26 @@ class AppController < ApplicationController
     not_found if @content.nil?
     @contents = JSON.parse(@content.content_json)
     @path = request.fullpath
-    @next = Content.where("id > ? and type_id = ? and status = 1", @content.id, @content.type_id).order("id").take
-    @pre = Content.where("id < ? and type_id = ? and status = 1", @content.id, @content.type_id).order("id desc").take
-    if @content.type_id
+    @next = Content.where("id > ? and type_id = ? and status = 1", @content.id, @content.type_id).select(:id,:title).order("id").take
+    @pre = Content.where("id < ? and type_id = ? and status = 1", @content.id, @content.type_id).select(:id,:title).order("id desc").take
+    if @content.type_id == 0
       @article = @content
       render "article"
+    elsif @content.type_id == 1
+      @video = @content
+      render "video"
+    else
+      raise "unknown content type_id"
     end
   end
   def article_list
-    @contents = Content.where(type_id: 0, status: 1).select(:id,:title,:tags,:img_url,:description,:type_id).order("id desc").paginate(page: params[:page])
+    content_list(0)
+  end
+  def video_list
+    content_list(1)
+  end
+  def content_list(type_id = 0)
+    @contents = Content.where(type_id: type_id, status: 1).select(:id,:title,:tags,:img_url,:description,:type_id).order("id desc").paginate(page: params[:page])
     @path = request.fullpath
     @is_ipad = is_ipad?
     if request.xhr?

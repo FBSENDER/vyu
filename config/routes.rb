@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/app/tag/:name", to: "app#tag"
 
   get "/app/article_list", to: "app#article_list"
+  get "/app/video_list", to: "app#video_list"
   get "/app/content/:id", to: "app#content"
 
   get "/app/sale_pai", to: "app#sale_pai"
