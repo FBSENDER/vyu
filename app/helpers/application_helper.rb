@@ -17,4 +17,8 @@ module ApplicationHelper
   def disable_turbolinks?(disable = false)
     content_for :disable_turbolinks, disable ? 'data-no-turbolink' : ''
   end
+
+  def is_turbolinks_cache?(cache = true)
+    content_for :turbolinks_cache, cache ? 'cache' : 'no-cache'
+  end
 end

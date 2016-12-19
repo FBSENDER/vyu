@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get "/app/article_list", to: "app#article_list"
   get "/app/video_list", to: "app#video_list"
+  get "/app/game_new", to: "app#game_new"
+  get "/app/game_jingdian", to: "app#game_jingdian"
   get "/app/content/:id", to: "app#content"
 
   get "/app/sale_pai", to: "app#sale_pai"
@@ -18,4 +20,8 @@ Rails.application.routes.draw do
   get "/app/sale_qiu", to: "app#sale_qiu"
   get "/app/sale_haocai", to: "app#sale_haocai"
   get "/app/sale_search/:keyword", to: "app#sale_search"
+
+  get "/app/hot", to: "app#hot"
+  post "/app/search", to: "app#search"
+
 end

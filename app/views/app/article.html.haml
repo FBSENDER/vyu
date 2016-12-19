@@ -8,6 +8,7 @@
           %h3.page-header #{content["h1_content"]}
           %p.content
             - @article.tags.split(',').each do |t|
+            - next if t == '羽毛球'
               %span.label.label-info.pull-right.tag-label
                 %a{href: "/app/tag/#{URI.encode(t)}/",style: "color:white"} #{t}
         - elsif content["type"] == 12
@@ -42,6 +43,7 @@
       .split
       %p.content
         - @article.tags.split(',').each do |t|
+          - next if t == '羽毛球'
           %span.label.label-info.pull-right.tag-label
             %a{href: "/app/tag/#{URI.encode(t)}/",style: "color:white"} #{t}
       %p.content

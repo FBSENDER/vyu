@@ -1,9 +1,11 @@
 - title(@video.title)
+- is_turbolinks_cache?(false)
 
-%section.container
+%section.container.video
   .row
     %article.col-sm-12.col-xs-12
-      %h3.page-header #{@video.title}
+      %p.titler #{@video.title}
+      .split
       - @contents.each do |content|
         - if content["type"] == 88
           #ykplayer0
@@ -12,6 +14,7 @@
       .split
       %p.content.text-right
         - @video.tags.split(',').each do |t|
+          - next if t == '羽毛球'
           %span.label.label-info.tag-label
             %a{href: "/app/tag/#{URI.encode(t)}/",style: "color:white"} #{t}
       %p.content

@@ -1,0 +1,19 @@
+- title "内容搜索"
+
+.container
+  .row
+    .col-sm12.col-xs-12
+      %p.content
+        - @tags.each_with_index do |tag, index|
+          %span.label.label-info.tag-label
+            %a{href: "/app/tag/#{URI.encode(tag)}/"} #{tag}
+          -if index % 5 == 4
+            %br
+
+    .col-sm-12.col-xs-12{style: "margin-top:20px"}
+      .form-inline
+        .form-group
+          %input.form-control{type: "text", id: "keyword", placeholder: "搜索内容"}
+        %button.btn.btn-default.pull-right{onclick: "do_search();"} Go
+
+      %p.alert.alert-info.hide.text-center#message{style: "margin-top:60px"}

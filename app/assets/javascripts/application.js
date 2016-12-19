@@ -82,3 +82,27 @@ $(document).on("turbolinks:load", function(){
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+var do_search = function(){
+  var k = $("#keyword").val();
+  if(k.trim() == ''){
+    return;
+  }
+  $.ajax({
+    url: "/app/search",
+    type: "post",
+    dataType: "json",
+    data: {
+      'keyword': k,
+    },
+    beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
+    success: function(data){
+      if(data.code == 1){
+        Turbolinks.visit("/app/tag/" + data.tag + "/");
+      }
+      else{
+        $("#message").html("哎呀 未找到...");
+        $("#message").removeClass("hide");
+      }
+    }
+  })
+};

@@ -3,11 +3,15 @@ class AppController < ApplicationController
   def tag
     @tag = Tag.where(name: params[:name]).take
     not_found if @tag.nil?
-    @contents = Content.where(status:1, id: @tag.relation_id.split(',')).select(:id,:title,:tags,:img_url,:description,:type_id).paginate(page: params[:page])
+    @type_ids = [0,1,2]
+    if params[:type_id]
+      @type_ids = [params[:type_id].to_i]
+    end
+    @contents = Content.where(id: @tag.relation_id.split(','), status: 1, type_id: @type_ids).select(:id,:title,:tags,:img_url,:description,:type_id).paginate(page: params[:page])
     @path = request.fullpath
     @is_ipad = is_ipad?
     if request.xhr?
-      render partial: "content_list", locals: {articles: @articles}
+      render partial: "content_list", locals: {contents: @contents}
       return 
     end
     render "content_list"
@@ -22,7 +26,10 @@ class AppController < ApplicationController
     if @content.type_id == 0
       @article = @content
       render "article"
-    elsif @content.type_id == 1
+    elsif @content.type_id == 1 
+      @video = @content
+      render "video"
+    elsif @content.type_id == 2
       @video = @content
       render "video"
     else
@@ -34,6 +41,20 @@ class AppController < ApplicationController
   end
   def video_list
     content_list(1)
+  end
+  def game_new
+    content_list(2)
+  end
+  def game_jingdian
+    @tag = Tag.where(id: 14).take
+    @contents = Content.where(status:1, id: @tag.relation_id.split(',')).select(:id,:title,:tags,:img_url,:description,:type_id).paginate(page: params[:page])
+    @path = request.fullpath
+    @is_ipad = is_ipad?
+    if request.xhr?
+      render partial: "content_list", locals: {articles: @articles}
+      return 
+    end
+    render "content_list"
   end
   def content_list(type_id = 0)
     @contents = Content.where(type_id: type_id, status: 1).select(:id,:title,:tags,:img_url,:description,:type_id).order("id desc").paginate(page: params[:page])
@@ -47,7 +68,7 @@ class AppController < ApplicationController
   end
   def hot
     @path = request.fullpath
-    @tags = ArticleTag.pluck(:name).sample(25)
+    @tags = Tag.pluck(:name).sample(25)
   end
   def jubao
   end
@@ -98,4 +119,68 @@ class AppController < ApplicationController
     tbk = Tbkapi::Taobaoke.new
     JSON.parse(tbk.taobao_tbk_item_get(keyword, '23487656','bd2e9dc09968be2b011cdf3ad13360cd',page_no + 1,20))
   end
+
+  def search
+    k = params[:keyword].strip
+    return unless check_keyword(k)
+    @keyword = Keyword.where(keyword: k).take
+    if @keyword
+      if @keyword.tag_name.empty?
+        render :json => {code: 0}.to_json
+      else
+        render :json => {code: 1,tag: URI.encode(@keyword.tag_name)}.to_json
+      end
+      @keyword.counter += 1
+      @keyword.save
+      return
+    end
+    tag = check_already_tags(k)
+    if tag
+      render :json => {code: 1,tag: URI.encode(tag)}.to_json
+      keyword = Keyword.new
+      keyword.keyword = k
+      keyword.tag_name = tag
+      keyword.save
+      return
+    end
+    contents = Content.where("status = 1 and title like ?", "%#{k}%").select(:id,:tags)
+    if contents && contents.size > 0
+      t = Tag.new
+      t.name = k
+      t.relation_id = contents.map{|a| a.id}.join(',')
+      t.save
+      render :json => {code: 1,tag: URI.encode(k)}.to_json
+      keyword = Keyword.new
+      keyword.keyword = k
+      keyword.tag_name = k
+      keyword.save
+      contents.each do |content|
+        ts = content.tags.split(',')
+        ts << k
+        content.tags = ts.uniq.join(',')
+        content.save
+      end
+      return
+    end
+    render :json => {code: 0}.to_json
+  end
+
+  def check_keyword(keyword)
+    if keyword.empty? || keyword.size > 16
+      redirect_to "/app/search/"
+      return false
+    end
+    return true
+  end
+
+  def check_already_tags(keyword)
+    tags = Tag.pluck(:name)
+    tags.each do |tag|
+      if tag.include?(keyword) || keyword.include?(tag)
+        return tag
+      end
+    end
+    return nil
+  end
+
 end

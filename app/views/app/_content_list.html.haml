@@ -8,7 +8,10 @@
           %span.label.label-success.tag-label 文章
         - if content.type_id == 1
           %span.label.label-warning.tag-label 视频
+        - if content.type_id == 2
+          %span.label.label-success.tag-label 比赛
         - content.tags.split(',').each do |tag|
+          - next if tag == '羽毛球'
           %span.label.label-info.tag-label
             %a{href: "/app/tag/#{URI.encode(tag)}/"} #{tag}
   - else
@@ -30,6 +33,8 @@
               %span.label.label-success.tag-label.pull-right 文章
             - if content.type_id == 1
               %span.label.label-warning.tag-label.pull-right 视频
+            - if content.type_id == 2
+              %span.label.label-success.tag-label.pull-right 比赛
 
   .split
 #scrolling.hide
