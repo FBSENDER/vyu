@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "/app/game_new", to: "app#game_new"
   get "/app/game_jingdian", to: "app#game_jingdian"
   get "/app/content/:id", to: "app#content"
+  get "/app/collection", to: "app#collection_list"
+  get "/app/collection/:id", to: "app#collection"
 
   get "/app/sale_pai", to: "app#sale_pai"
   get "/app/sale_xie", to: "app#sale_xie"

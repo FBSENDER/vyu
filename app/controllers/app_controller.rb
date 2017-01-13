@@ -36,6 +36,25 @@ class AppController < ApplicationController
       raise "unknown content type_id"
     end
   end
+
+  def collection_list
+    @collections = params[:type] ? Collection.where(type_id: params[:type].to_i).to_a : Collection.all.to_a
+    @title = case params[:type]
+             when "1" then '技术分类'
+             when "2" then '教程合辑'
+             when "3" then '比赛合辑' 
+             else '视频合辑'
+             end
+  end
+
+  def collection
+    @collection = Collection.where(id: params[:id].to_i).take
+    not_found if @collection.nil?
+    @contents = Content.where(status: 1).joins("join bd_collection_content_relations on bd_collection_content_relations.content_id = bd_contents.id and bd_collection_content_relations.collection_id = #{@collection.id}").select(:id,:tags,:title,:img_url,:type_id).paginate(page: params[:page])
+    @title = @collection.name
+    render "content_list"
+  end
+
   def article_list
     content_list(0)
   end

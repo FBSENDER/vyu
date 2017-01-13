@@ -1,0 +1,19 @@
+- title @title
+
+.container
+  .row
+    #content_list
+      .split
+      - @collections.each do |collection|
+        .col-sm-12.col-xs-12
+          .col-sm-3.col-xs-3
+            %img.center-block{src: "#{collection.img_url}", style: "height:80px"}
+          .col-sm-9.col-xs-9
+            %a{href: "/app/collection/#{collection.id}/"}
+              %p.app_desc{style: "color: black"}
+                #{collection.name}
+                %br
+                #{collection.description}
+        .col-sm-12.col-xs-12.split
+
+      

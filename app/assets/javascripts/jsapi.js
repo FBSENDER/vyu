@@ -857,7 +857,7 @@ function ykjsapi(){
         }
         var fileId = this._videoInfo.getFileId(e[ii].stream_fileid, 0);
         var src = this._videoInfo.getVideoSrc(ii, 0, d, e[ii].stream_type, fileId);
-        set_jwplayer(src);
+        set_jwplayer(src, this._vid);
         return;
         e = this._videoInfo._videoSegsDic;
         g = "";

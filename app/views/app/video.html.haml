@@ -6,10 +6,14 @@
     %article.col-sm-12.col-xs-12
       %p.titler #{@video.title}
       .split
-      - @contents.each do |content|
-        - if content["type"] == 88
-          #ykplayer0
-            %input#vid{value: "#{content['vid']}"}
+      - @contents.each_with_index do |content, index|
+        - if content["type"] == 87
+          .video.player_qq.text-center
+            %iframe{src: "#{content['src']}, allowfullscreen: ture, frameborder: 0"}
+          .split
+        - elsif content["type"] == 88
+          .video.player_yk{id: "player_#{index}", data: {vid: "#{content['vid']}"}}
+          .split
     %aside.col-sm-12.col-xs-12
       .split
       %p.content.text-right
