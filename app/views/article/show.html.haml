@@ -21,6 +21,7 @@
         - if content["type"] == 11
           %h1.page-header #{content["h1_content"]}
           %p.small #{@article.description}
+          = render partial: "layouts/google_ad"
         - elsif content["type"] == 12
           %h2.page-header #{content["h2_content"]}
         - elsif content["type"] == 2
