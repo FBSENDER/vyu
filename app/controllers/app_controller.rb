@@ -94,6 +94,7 @@ class AppController < ApplicationController
 
   def tbk_list(fav_id)
     data = get_tbk_uatm_json(fav_id, (params[:page] || 0).to_i)
+    p data
     @items = data["tbk_uatm_favorites_item_get_response"]["results"]["uatm_tbk_item"]
     @title ="特惠-羽毛球装备"
     @path = request.fullpath
@@ -131,12 +132,12 @@ class AppController < ApplicationController
 
   def get_tbk_uatm_json(fav_id = 1,page_no)
     tbk = Tbkapi::Taobaoke.new
-    JSON.parse(tbk.taobao_tbk_uatm_favorites_item_get(fav_id,4324027,'tbk_vxixi','23184262','022a6647badb948d3cf8d6b8022476ce',2,page_no + 1,20))
+    JSON.parse(tbk.taobao_tbk_uatm_favorites_item_get(fav_id,75364574,'tbkvxixi','23184262','022a6647badb948d3cf8d6b8022476ce',2,page_no + 1,20))
   end
 
   def get_tbk_search_json(keyword, page_no)
     tbk = Tbkapi::Taobaoke.new
-    JSON.parse(tbk.taobao_tbk_item_get(keyword, '23184262','022a6647badb948d3cf8d6b8022476ce',page_no + 1,20))
+    JSON.parse(tbk.taobao_tbk_item_get(keyword, '23184103','1d49e7bae53ea281d9a4333d5dabd1ca',page_no + 1,20))
   end
 
   def search
