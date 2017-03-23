@@ -105,16 +105,16 @@ class AppController < ApplicationController
   end
 
   def sale_pai
-    tbk_list(2322121)
+    tbk_list(2295076)
   end
   def sale_xie
-    tbk_list(2322124)
+    tbk_list(2295109)
   end
   def sale_qiu
-    tbk_list(2322133)
+    tbk_list(2295129)
   end
   def sale_haocai
-    tbk_list(2322128)
+    tbk_list(2295134)
   end
   def sale_search
     data = get_tbk_search_json(params[:keyword].strip, (params[:page] || 0).to_i)
@@ -131,12 +131,12 @@ class AppController < ApplicationController
 
   def get_tbk_uatm_json(fav_id = 1,page_no)
     tbk = Tbkapi::Taobaoke.new
-    JSON.parse(tbk.taobao_tbk_uatm_favorites_item_get(fav_id,68494758,'ymqapp','23487656','bd2e9dc09968be2b011cdf3ad13360cd',2,page_no + 1,20))
+    JSON.parse(tbk.taobao_tbk_uatm_favorites_item_get(fav_id,4324027,'tbk_vxixi','23184262','022a6647badb948d3cf8d6b8022476ce',2,page_no + 1,20))
   end
 
   def get_tbk_search_json(keyword, page_no)
     tbk = Tbkapi::Taobaoke.new
-    JSON.parse(tbk.taobao_tbk_item_get(keyword, '23487656','bd2e9dc09968be2b011cdf3ad13360cd',page_no + 1,20))
+    JSON.parse(tbk.taobao_tbk_item_get(keyword, '23184262','022a6647badb948d3cf8d6b8022476ce',page_no + 1,20))
   end
 
   def search
