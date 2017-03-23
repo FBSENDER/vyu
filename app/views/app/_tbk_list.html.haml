@@ -1,5 +1,5 @@
 - items.each do |item|
-  - next if item['click_url'].nil? || item['click_url'].emtpy?
+  - next if item['click_url'].nil? || item['click_url'].empty?
   .sale_item
     %a{href: "#{item['click_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
       .sale_cover
