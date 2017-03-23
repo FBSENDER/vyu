@@ -95,7 +95,7 @@ class AppController < ApplicationController
   def tbk_list(fav_id)
     data = get_tbk_uatm_json(fav_id, (params[:page] || 0).to_i)
     @items = data["tbk_uatm_favorites_item_get_response"]["results"]["uatm_tbk_item"]
-    @title ="值得买"
+    @title ="特惠-羽毛球装备"
     @path = request.fullpath
     if request.xhr?
       render partial: "tbk_list", locals: {items: @items}
@@ -120,7 +120,7 @@ class AppController < ApplicationController
     data = get_tbk_search_json(params[:keyword].strip, (params[:page] || 0).to_i)
     @items = data["tbk_item_get_response"]["results"]["n_tbk_item"]
     @keyword = params[:keyword].strip
-    @title ="值得买"
+    @title ="搜索-羽毛球装备"
     @path = request.fullpath
     if request.xhr?
       render partial: "search_tbk_list", locals: {items: @items}

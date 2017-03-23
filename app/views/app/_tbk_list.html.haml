@@ -3,7 +3,7 @@
     %a{href: "#{item['click_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
       .sale_cover
         %img.img-responsive.lazy{data: {original: "#{item['pict_url']}"}, src: ""}
-    %a{href: "#", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
+    %a{href: "#{item['click_url']}", target: "_blank", data: {no: {turbolinks: "true"}}, style: 'color: "#000"'}
       .sale_info
         %p.sale_title #{item['title']}
         %p.sale_stat
