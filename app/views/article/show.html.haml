@@ -12,10 +12,10 @@
           - @articles.each do |article|
             %p.small
               %a{href: "/article/#{article.id}/"} #{article.title}
+          %p
+            %a{href: "//shang.qq.com/wpa/qunwpa?idkey=2108047919597f47df6d3528e723ddd19917a44de1d75cbbac17ff8ffa059330", target: "_blank", rel: "nofollow", title: "羽毛球新手交流群"} 
+              %img{src: "//pub.idqqimg.com/wpa/images/group.png", style: "border:0"}
 
-          #bt_logo
-            %a{href: "http://www.ibantang.com", title: "发现值得买", target: "_blank"}
-              %img.center-block{style: "width: 150px;padding-top:5px", src: "http://www.vxixi.com/bt_logo.jpg", alt:"半糖"}
     %article.col-md-8.col-sm-12
       - @contents.each do |content|
         - if content["type"] == 11
