@@ -18,8 +18,10 @@
 //= require article
 //= require changyan
 //= require guize
+//= require lazyload
 
-$(document).on("turbolinks:load", function(){
+//$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
   $('img.lazy[src=""]').lazyload({threshold: 200, effect: "fadeIn"});
   if($(".app").length <= 0){
     guize();
