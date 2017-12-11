@@ -14,7 +14,10 @@
 // require jquery_ujs
 // require bootstrap-sprockets
 // require turbolinks
-//= require_tree .
+// require_tree .
+//= require article
+//= require changyan
+//= require guize
 
 $(document).on("turbolinks:load", function(){
   $('img.lazy[src=""]').lazyload({threshold: 200, effect: "fadeIn"});
