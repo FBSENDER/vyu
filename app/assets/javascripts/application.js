@@ -31,10 +31,10 @@ $(document).ready(function(){
   else{
     video();
   }
-  if($("#need_taobao_convert_url").size() > 0){
+  if($("#need_taobao_convert_url").length > 0){
     taodianjin(window,document);
   }
-  if($("#content_list").size() > 0){
+  if($("#content_list").length > 0){
     $(window).on("scroll", function(){
       var more_products_url = $('.pagination a[rel=next]').attr('href');
       if(more_products_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
@@ -53,7 +53,7 @@ $(document).ready(function(){
       }
     });
   }
-  if($("#article_list").size() > 0){
+  if($("#article_list").length > 0){
     $(window).on("scroll", function(){
       var more_products_url = $('.pagination a[rel=next]').attr('href');
       if(more_products_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60){
@@ -72,7 +72,7 @@ $(document).ready(function(){
       }
     });
   }
-  if($("#search_fuli").size() > 0){
+  if($("#search_fuli").length > 0){
     $("#search_fuli").on('keypress', function(e){
       var _this = $("#search_fuli");
       if(e.keyCode == 13 && $.trim(_this.val()) != ''){
