@@ -26,4 +26,11 @@ Rails.application.routes.draw do
   get "/app/hot", to: "app#hot"
   post "/app/search", to: "app#search"
 
+  # taobao
+  get "baobei/:id", to: "taobao#baobei"
+  get "youxuan/:keyword", to: "taobao#youxuan"
+  get "dian/:id", to: "taobao#dian"
+  get "product_map", to: "taobao#product_map"
+  get "shop_map", to: "taobao#shop_map"
+
 end

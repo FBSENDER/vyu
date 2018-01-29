@@ -1,0 +1,27 @@
+- title("淘宝店铺大全")
+- head_desc("淘宝店铺大全 - vxixi淘宝店铺站点地图")
+- keywords("淘宝店铺大全")
+- path("/shop_map/")
+- mobile_url("http://www.vxixi.com#{@path}")
+
+.container
+  .row
+    .col-md-12
+      %nav
+        %a{href: "/"} 羽毛球
+        &nbsp;>&nbsp;
+        %b 淘宝店铺大全
+
+  %article.row
+    .col-md-12
+      %h1 淘宝店铺大全
+      %p
+        - @shops.each do |sp|
+          %a{href: "/dian/#{sp.source_id}/"} #{sp.title}
+      %p
+        -((@page+1)..(@page + 21)).each do |num|
+          %a{href: "/product_map/?page=#{num}"} 第#{num}页
+      .page-header
+      %footer
+        %div#SOHUCS
+      .page-header
