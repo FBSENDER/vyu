@@ -1,10 +1,10 @@
 require 'taobao'
 class TaobaoController < ApplicationController
   def baobei
-    unless is_robot?
-      redirect_to "http://m.iquan.net/saber/detail?itemId=#{params[:id]}&pid=mm_32854514_24420321_584898224&forCms=1&super=1&from=from_vxixi", status: 302
-      return
-    end
+    #unless is_robot?
+    #  redirect_to "http://m.iquan.net/saber/detail?itemId=#{params[:id]}&pid=mm_32854514_24420321_584898224&forCms=1&super=1&from=from_vxixi", status: 302
+    #  return
+    #end
     @product = Product.where(item_id: params[:id].to_i).take
     not_found if @product.nil?
     @detail = ProductDetail.where(item_id: @product.item_id).take
