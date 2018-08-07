@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "shuiguo#jidanguo", constraints: {host: "www.jidanguo.top"}
   root "guize#yumaoqiu"
   get "/article/", to: "article#index"
   get "/article/:id", to: "article#show"
