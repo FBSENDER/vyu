@@ -12,17 +12,14 @@
         - @categories.each do |ct|
           &nbsp;>&nbsp;
           %a{href: "/youxuan/#{URI.encode(ct)}/"} #{ct}
-        &nbsp;>&nbsp;
-        %br
-        %b #{@product.title}
 
   %article.row
     .col-md-12
-      %h1 #{@product.title}
-      %h2 剁手都要买的好东西 - #{@product.title}
-      %img{src: "#{@product.pic_url}", alt: "#{@product.title}", style: "margin-top: 5px"}
+      %h1.page-header{style: "height:50px;line-height:50px;overflow:hidden;"} #{@product.title}
+      %p.small 剁手都要买的好东西 - #{@product.title}
+      %img{src: "#{@product.pic_url}", alt: "#{@product.title}", style: "margin: 5px;width:200px;"}
       - JSON.parse(@product.small_images).each_with_index do |pic, index|
-        %img{src: "#{pic}", alt: "#{@product.title}_商品详情图#{index}"}
+        %img{src: "#{pic}", alt: "#{@product.title}_商品详情图#{index}", style: "margin:5px;width:200px;"}
       - if @detail
         %p #{@detail.short_title} - #{@detail.description}
         %img{src: "#{@detail.cover_url}", alt: "#{@detail.short_title}"}
@@ -42,7 +39,7 @@
           %a{href: "/dian/#{@shop.source_id}/", title: "#{@shop.title}"}
             %img.shop_cover{src: "#{@shop.pic_url}", alt: "#{@shop.title}"}
       - if @related_shops && @related_shops.size > 0
-        %h3 推荐店铺：
+        %h3.page-header 推荐店铺：
         - @related_shops.each do |shop|
           %div
             %p #{shop.title} - 掌柜：#{shop.nick}
@@ -50,42 +47,42 @@
               %a{href: "/dian/#{shop.source_id}/", title: "#{shop.title}"}
                 %img.shop_cover{src: "#{shop.pic_url}", alt: "#{shop.title}"}
       - if @suggest_keywords && @suggest_keywords.size > 0
-        %h3 相关搜索词：
+        %h3.page-header 相关搜索词
         %p
           - @suggest_keywords.each do |k|
             %a{href: "/youxuan/#{URI.encode(k)}/"} #{k}
       - if @same_shop_products && @same_shop_products.size > 0
-        %h3 同店商品推荐：
+        %h3.page-header 同店商品推荐
         - @same_shop_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
-  
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+    
+        .clearfix
       - if @related_products && @related_products.size > 0
-        %h3 相关商品推荐：
+        %h3.page-header 相关商品推荐
         - @related_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
-      
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+        .clearfix
       - if @new_products && @new_products.size > 0
-        %h3 新品推荐：
+        %h3.page-header 新品推荐
         - @new_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
-  
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+        .clearfix
+    
       - if @hot_products && @hot_products.size > 0 
-        %h3 热销商品推荐：
+        %h3.page-header 热销商品推荐
         - @hot_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
-      .page-header
-      %footer
-        %div#SOHUCS
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+        .clearfix
       .page-header
