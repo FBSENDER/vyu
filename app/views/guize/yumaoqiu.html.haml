@@ -284,51 +284,9 @@
               %br
               内容翻译自国际羽联2018年最新羽毛球比赛规则
               %br
-              %a{href: "/shop_map/"} 淘宝店铺大全
-              %br
-              %a{href: "/product_map/"} 淘宝商品大全
-              %br
-              %a{href: "http://www.shikuaigou.com"} 十块购
-              %br
-              %a{href: "https://www.iquan.net"} 淘宝优惠券
-              %br
-              %a{href: "http://www.zhequan.cc"} 折券
-              %br
-              %a{href: "http://www.xiongmao123.com"} 熊猫优选
-              %br
-              %a{href: "http://www.sports-sh.com"} 先驱体育
-              %br
-              %a{href: "http://www.gouwuzhinan.cn"} 购物指南
-              %br
-              %a{href: "https://www.hg0088.onl"} hg0088开户 
-              %br
-              %a{href: "http://gggxb.net"} 新宝GG
-              %br
-              %a{href: "http://xb5c.com"} 新宝5
-              %br
-              %a{href: "http://001432.com"} 申博太阳城
-              %br
-              %a{href: "http://www.idy360.com/"} 365bet
-              %br
-              %a{href: "http://www.idy360.com/tv/region/3"} 365bet体育在线
-              %br
-              %a{href: "http://www.zjgxzs.cn/07257r/0616224gj7.html"} 博猫注册
-              %br
-              %a{href: "http://www.flowlover.com"} 网红进口零食网
-              %br
-              %a{href: "https://www.sandscotaicentral.cn"} 澳门金沙城酒店预订
-              %br
-              %a{href: "http://www.beer8.cn/list-27-1.html"} 抖音刷评论
-              %br
-              %a{href: "http://dl.pconline.com.cn/download/1368796.html"} 彩神北京赛车PK10
-              %br
-              %a{href: "http://www.qtx.com/"} 足球即时比分
-              %br
-              %a{href: "https://wbmanbetx.com"} 万博
-              %br
-              %a{href: "http://www.jnd28fx.com/"} 加拿大28分析
-              %br
-              %a{href: "http://www.yzups.com"} 微信刷票
+              - @links.each do |link|
+                %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
+                %br
 
 
     = render partial: "layouts/related_right"
