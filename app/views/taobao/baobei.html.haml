@@ -25,7 +25,7 @@
         %img{src: "#{@detail.cover_url}", alt: "#{@detail.short_title}"}
         - JSON.parse(@detail.detail_images).each_with_index do |pic, index|
           %img{src: "#{pic}", alt: "#{@detail.short_title}_详情图_#{index}"}
-      %p 【我剁手都要买的宝贝（#{@product.title}），快来和我一起瓜分红包】http://www.xiongmao123.com/baobei/#{@product.item_id}/ 点击链接，再选择浏览器打开；或复制这条信息￥www.xiongmao123.com￥后打开手淘
+      %p 【我剁手都要买的宝贝（#{@product.title}），快来和我一起瓜分红包】 点击链接，再选择浏览器打开；或复制这条信息￥www.vxixi.com￥后打开手淘
       %p #{@product.title}，原价#{@product.origin_price}元，领券立减#{@product.origin_price - @product.price}元，月销#{@product.volume}件，淘宝/天猫热销中，优惠券马上领。
       - if @coupon
         %p #{@product.title}淘宝天猫店铺#{@coupon.price}元优惠券，优惠券有效期至#{Time.at(@coupon.end_time.to_i).strftime("%Y年%m月%d日")}，在有效期内下单，原价#{@product.price}元,券后价#{@product.price - @coupon.price}元，可立省#{@coupon.price}元。#{@product.title}最近30天已经售出#{@product.volume}件，可以放心购买。
@@ -39,13 +39,13 @@
           %a{href: "/dian/#{@shop.source_id}/", title: "#{@shop.title}"}
             %img.shop_cover{src: "#{@shop.pic_url}", alt: "#{@shop.title}"}
       - if @related_shops && @related_shops.size > 0
-        %h3.page-header 推荐店铺：
+        %h3.page-header 推荐店铺
         - @related_shops.each do |shop|
-          %div
-            %p #{shop.title} - 掌柜：#{shop.nick}
-            %div{style: "text-align:center"}
-              %a{href: "/dian/#{shop.source_id}/", title: "#{shop.title}"}
-                %img.shop_cover{src: "#{shop.pic_url}", alt: "#{shop.title}"}
+          .col-md-3.col-sm-6.col-xs-6
+            %a{href: "/dian/#{shop.source_id}/", title: "#{shop.title}"}
+              %img{src: "#{shop.pic_url}", alt: "#{shop.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{shop.title} - 掌柜：#{shop.nick}
+        .clearfix
       - if @suggest_keywords && @suggest_keywords.size > 0
         %h3.page-header 相关搜索词
         %p
@@ -85,4 +85,3 @@
               %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
               %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
         .clearfix
-      .page-header

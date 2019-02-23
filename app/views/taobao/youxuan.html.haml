@@ -14,45 +14,45 @@
 
   %article.row
     .col-md-12
-      %h1 #{@keyword}
+      %h1.page-header #{@keyword}
       %h2 天猫淘宝折扣优惠#{@keyword}商品列表
-      %p #{@description.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe}
+      %p.page-header #{@description.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe}
   
       - if @products && @products.size > 0
         - @products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+        .clearfix
   
       - if @shops && @shops.size > 0
-        %h3 相关淘宝天猫店铺：
+        %h3.page-header 相关淘宝天猫店铺
         - @shops.each do |shop|
-          %div
-            %p #{shop.title.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe} - 掌柜：#{shop.nick}
-            %div{style: "text-align:center"}
-              %a{href: "/dian/#{shop.source_id}/", title: "#{shop.title}"}
-                %img.shop_cover{src: "#{shop.pic_url}", alt: "#{shop.title}"}
+          .col-md-3.col-sm-6.col-xs-6
+            %a{href: "/dian/#{shop.source_id}/", title: "#{shop.title}"}
+              %img{src: "#{shop.pic_url}", alt: "#{shop.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{shop.title.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe} - 掌柜：#{shop.nick} 
+        .clearfix
   
       - if @suggest_keywords && @suggest_keywords.size > 0
-        %h3 相关搜索词：
+        %h3.page-header 相关搜索词
         %p
           - @suggest_keywords.each do |k|
             %a{href: "/youxuan/#{URI.encode(k)}/"} #{k}
   
       - if @new_products && @new_products.size > 0
-        %h3 新品推荐：
+        %h3.page-header 新品推荐
         - @new_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
   
       - if @hot_products && @hot_products.size > 0 
-        %h3 热销商品推荐：
+        %h3.page-header 热销商品推荐
         - @hot_products.each do |product|
-          %div
+          .col-md-3.col-sm-6.col-xs-6
             %a{href: "/baobei/#{product.item_id}/", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title}"}
-              %p #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}
-      .page-header
+              %img{src: "#{product.pic_url}", alt: "#{product.title}", style: "width:100%;"}
+              %p{style: "overflow:hidden;height:60px;"} #{product.title} - 原价#{product.origin_price}元，折扣价#{product.price}元 - 掌柜#{product.nick}

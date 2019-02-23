@@ -18,10 +18,10 @@ class TaobaoController < ApplicationController
     @shop = Shop.where(source_id: @product.seller_id).take
     @suggest_keywords = get_suggest_keywords_new(@categories[-1])
     @coupon = Coupon.where(item_id: @product.item_id).take
-    @same_shop_products = Product.where(seller_id: @product.seller_id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick)
-    @related_products = Product.where("id > ?", @product.id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order(:id).limit(10)
-    @related_shops = Shop.where("id > ?", @shop.id).select(:source_id, :title, :nick, :pic_url).limit(10) if @shop
-    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(10)
+    @same_shop_products = Product.where(seller_id: @product.seller_id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick).limit(12)
+    @related_products = Product.where("id > ?", @product.id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order(:id).limit(12)
+    @related_shops = Shop.where("id > ?", @shop.id).select(:source_id, :title, :nick, :pic_url).limit(12) if @shop
+    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(12)
     @hot_products = []
   end
 
@@ -34,7 +34,7 @@ class TaobaoController < ApplicationController
     @suggest_keywords = get_suggest_keywords_new(@keyword)
     @products = get_products_by_keyword(@keyword)
     @shops = Shop.where(source_id: @products.map{|pd| pd.seller_id}).select(:source_id, :title, :nick, :pic_url)
-    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(10)
+    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(12)
     @hot_products = []
   end
 
@@ -49,9 +49,9 @@ class TaobaoController < ApplicationController
     @description = "#{@shop.title}是一家经营信誉良好、获得消费者广泛好评的一家#{@shop.is_tmall == 1 ? '天猫' : '淘宝'}店铺。店铺掌柜为#{@shop.nick}，如果大家有任何关于#{@shop.title}的问题，都可以向其进行咨询。店铺的注册地点在#{@shop.provcity}，全国包邮哦，看到合适的宝贝赶快拍下，#{@shop.provcity}附近的朋友们可能在当天就收到快递喽。#{@shop.title}在售的宝贝有#{@shop.totalsold}件，有木有很多！近30天的销量为#{@shop.procnt}件，代掌柜#{@shop.nick}感谢大家的大力支持。#{@shop.title}主营类目为#{ind}，具体有#{@shop.main_auction}，欢迎大家选购。#{@shop.title}的综合评分还是不错的，在宝贝描述相符、服务态度、物流服务上均在平均水平之上，大家可以放心选购自己心仪的宝贝。还在等什么？快去#{@shop.title}逛一逛~"
     @path = request.path + "/"
     @suggest_keywords = get_suggest_keywords_new(@shop.search_keyword)
-    @products = Product.where(seller_id: @shop.source_id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick)
+    @products = Product.where(seller_id: @shop.source_id).select(:item_id, :title,:pic_url, :origin_price, :price, :nick).limit(20)
     @shops = Shop.where("id > ?", @shop.id).order(:id).limit(10).select(:source_id, :title, :nick, :pic_url)
-    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(10)
+    @new_products = Product.select(:item_id, :title,:pic_url, :origin_price, :price, :nick).order("id desc").limit(12)
     @hot_products = []
   end
 
@@ -81,6 +81,6 @@ class TaobaoController < ApplicationController
     result = SearchResult.where(keyword: keyword).take
     return [] if result.nil?
     item_ids = CS.where(coupon_id: result.coupon_ids.split(',').map{|c| c.to_i}).pluck(:item_id)
-    Product.where(item_id: item_ids).select(:item_id, :title, :pic_url, :origin_price, :price, :seller_id, :nick, :is_tmall, :volume).to_a
+    Product.where(item_id: item_ids).select(:item_id, :title, :pic_url, :origin_price, :price, :seller_id, :nick, :is_tmall, :volume).limit(20).to_a
   end
 end
