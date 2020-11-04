@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root "shuiguo#jidanguo", constraints: {host: "www.jidanguo.top"}
   root "shuiguo#heigouqi", constraints: {host: "www.iheigouqi.top"}
   root "guize#yumaoqiu"
+  get "changyan/login" => "guize#login"
+  get "changyan/logout" => "guize#logout"
   get "/article/", to: "article#index"
   get "/article/:id", to: "article#show"
   get "/article/:id/update", to: "article#update"
