@@ -13,6 +13,8 @@ function guize(){
   $(window).scroll(function(){
     var $ul = $('#doc-sidebar ul');
     var $rd = $('#related_right');
+    var $pop_ad = $('#pop_ad');
+    $pop_ad.hide();
     if($(this).scrollTop() > 80){
       if($ul.css('top') != '20px'){
         $ul.animate({top: "20px"},0);

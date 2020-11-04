@@ -7,9 +7,3 @@
     %p
       %a{href: "//shang.qq.com/wpa/qunwpa?idkey=2108047919597f47df6d3528e723ddd19917a44de1d75cbbac17ff8ffa059330", target: "_blank", rel: "nofollow", title: "羽毛球新手交流群"} 
         %img{src: "//pub.idqqimg.com/wpa/images/group.png", style: "border:0"}
-    - if @articles && @articles.size > 0
-      %p 
-        %a{href: "/article/"} 羽毛球比赛技巧文章
-      - @articles.each do |article|
-        %p.small
-          %a{href: "/article/#{article.id}/"} #{article.title}
