@@ -1,0 +1,79 @@
+- title(@title)
+- head_desc("#{@title} - #{@info["recommends"][0]}")
+- keywords("#{@title},#{@product.title.split.join(',')}")
+- path(request.path)
+- mobile_url("http://www.vxixi.com#{request.path}")
+
+.container{style: "margin-top: -20px;"}
+  .row{style: "background-color: #fff;margin-bottom:2px;"}
+    .col-md-12
+      %nav{style: "padding: 20px 0;"}
+        %a{href: "/", title: "羽毛球规则"} 首页
+        &nbsp;>&nbsp;
+        %a{href: "https://www.uuhaodian.com/query/#{URI.encode_www_form_component(@info["cname3"])}/", target: "_blank"} #{@info["cname3"]}
+        &nbsp;>&nbsp;
+        #{@title}
+
+  %article.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h1.page-header{style: "font-size:14px;color:#666;overflow:hidden;"} #{@title}
+      .alert.alert-info
+        %p.small 
+          #{@info["cname3"]}推荐：#{@info["title"]}
+        %p.small
+          参考价格：#{@product.price_info}
+        %p.small
+          店铺：#{@info["shop_title"]} -
+          %a{href: "https://www.uuhaodian.com/jdshop_go/#{@info["shop_id"]}/", rel: "nofollow", target: "_blank"} 进店看看
+        - unless @info["brand"].nil?
+          %p.small
+            品牌：
+            %a{href: "https://www.uuhaodian.com/query/#{URI.encode_www_form_component(@info["brand"]["brand_name"])}/", target: "_blank"} #{@info["brand"]["brand_name"]}
+
+      %p.small.text-right
+        %a.btn.btn-sm.btn-primary{href: "https://www.uuhaodian.com/jd/buy/#{@info["sku"]}/", rel: "nofollow", target: "_blank"} 去京东购买
+      %div{style: "margin: 20px auto;width: 100%;text-align:center;"}
+        %img{src: "#{@product.pic_url}", alt: "#{@product.title}", style: "max-width:300px;"}
+      .alert.alert-success
+        %p 
+          %b 推荐理由：
+        - @info["recommends"].each do |r|
+          %p #{r}
+
+      %p.alert.alert-info{style: "font-size: 14px;color: #666;"}
+        商品图片详情
+        %span{style: "float:right"} 
+          %a#more-btn{href: "javascript:;"}展开内容+
+      #pics.sno{style: "margin: 20px auto;width: 100%;text-align:center;"}
+        - @info["pics"].each_with_index do |pic, index|
+          %div{style: "margin: 0auto;width: 100%;text-align:center;"}
+            %img{src: "#{pic}", alt: "#{@title}_图片#{index+1}", style: "max-width:500px;width: 100%;"}
+
+  %aside.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h2.alert.alert-info{style: "font-size: 14px;color: #666;"} 更多#{@info["cname3"]}推荐
+    - @related.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yumaoqiu/#{product["id"]}.html", title: "#{product["title"]}"}
+          %img{src: "#{product["pic_url"]}", alt: "#{product["title"].split.join}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product["title"].split.join}
+            %br
+            %span.small{style: "color: red;"} #{product["price_info"]}
+
+= render partial: "layouts/footer"
+
+:javascript
+  var more_open = false;
+  $("#more-btn").click(function(){
+    if(more_open){
+      more_open = !more_open;
+      $("#pics").addClass("sno");
+      $("#more-btn").html("展开内容+");
+    }
+    else{
+      more_open = !more_open;
+      $("#pics").removeClass("sno");
+      $("#more-btn").html("收起内容-");
+    }
+  });

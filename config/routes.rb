@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/article/:id/update", to: "article#update"
   post "/article/publish", to: "article#publish"
 
+  get "/yumaoqiu/:id.html", to: "jd#static_product"
+
   get "/app/video", to: "app#video"
   get "/app/tag/:name", to: "app#tag"
 
