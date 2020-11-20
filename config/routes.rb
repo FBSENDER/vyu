@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post "/article/publish", to: "article#publish"
 
   get "/yumaoqiu/:id.html", to: "jd#static_product"
+  get "/yumaoqiu_fenlei/:fenlei", to: "jd#static_product_fenlei"
+  get "/yumaoqiu_pinpai/:pinpai", to: "jd#static_product_pinpai"
 
   get "/app/video", to: "app#video"
   get "/app/tag/:name", to: "app#tag"

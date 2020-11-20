@@ -10,7 +10,7 @@
       %nav{style: "padding: 20px 0;"}
         %a{href: "/", title: "羽毛球规则"} 首页
         &nbsp;>&nbsp;
-        %a{href: "https://www.uuhaodian.com/query/#{URI.encode_www_form_component(@info["cname3"])}/", target: "_blank"} #{@info["cname3"]}
+        %a{href: "/yummaoqiu_fenlei/#{URI.encode_www_form_component(@product.fenlei)}/"} #{@product.fenlei}
         &nbsp;>&nbsp;
         #{@title}
 
@@ -23,12 +23,17 @@
         %p.small
           参考价格：#{@product.price_info}
         %p.small
-          店铺：#{@info["shop_title"]} -
+          店铺：
+          %a{href: "https://www.iquan.net/dianpu/jd_#{@info["shop_id"]}/", target: "_blank"} #{@info["shop_title"]}
+          #{" - "}
           %a{href: "https://www.uuhaodian.com/jdshop_go/#{@info["shop_id"]}/", rel: "nofollow", target: "_blank"} 进店看看
-        - unless @info["brand"].nil?
+
+        - unless @product.brand.empty?
           %p.small
             品牌：
-            %a{href: "https://www.uuhaodian.com/query/#{URI.encode_www_form_component(@info["brand"]["brand_name"])}/", target: "_blank"} #{@info["brand"]["brand_name"]}
+            %a{href: "/yumaoqiu_pinpai/#{URI.encode(@product.brand.upcase)}/", title: "#{@product.brand}羽毛球装备推荐"} #{@product.brand}
+            #{" - "}
+            %a{href: "https://www.uuhaodian.com/query/#{URI.encode_www_form_component(@product.brand)}/", target: "_blank", title: "#{@product.brand}优惠券"} #{@product.brand}优惠券
 
       %p.small.text-right
         %a.btn.btn-sm.btn-primary{href: "https://www.uuhaodian.com/jd/buy/#{@info["sku"]}/", rel: "nofollow", target: "_blank"} 去京东购买
@@ -60,6 +65,17 @@
             #{product["title"].split.join}
             %br
             %span.small{style: "color: red;"} #{product["price_info"]}
+
+    .col-md-12
+      %h2.alert.alert-info{style: "font-size: 14px;color: #666;"} 羽毛球装备 - 热销推荐
+    - @products.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+          %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product.title.split.join}
+            %br
+            %span.small{style: "color: red;"} #{product.price_info}
 
 = render partial: "layouts/footer"
 

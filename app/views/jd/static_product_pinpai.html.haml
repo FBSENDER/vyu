@@ -1,0 +1,39 @@
+- title("#{@pinpai}羽毛球装备,#{@pinpai}羽毛球装备推荐,#{@pinpai}羽毛球装备价格图片")
+- head_desc("为您推荐#{@items.size}款#{@pinpai}羽毛球装备，包含#{@pinpai}的价格信息、#{@pinpai}的图片展示等，挑选#{@pinpai}羽毛球装备，就来vxixi.com")
+- keywords("#{@pinpai},#{@pinpai}羽毛球装备,#{@pinpai}羽毛球装备推荐,#{@pinpai}羽毛球装备价格,#{@pinpai}羽毛球装备图片,#{@pinpai}羽毛球装备购买")
+- path(request.path + "/")
+- mobile_url("http://www.vxixi.com#{request.path.upcase}/")
+
+.container{style: "margin-top: -20px;"}
+  .row{style: "background-color: #fff;margin-bottom:2px;"}
+    .col-md-12
+      %nav{style: "padding: 20px 0;"}
+        %a{href: "/", title: "羽毛球规则"} 首页
+        &nbsp;>&nbsp;
+        #{@pinpai}羽毛球装备
+
+  %article.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h1.alert.alert-info{style: "font-size: 14px;color: #666;"} #{@pinpai}羽毛球装备推荐
+    - @items.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+          %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product.title.split.join}
+            %br
+            %span.small{style: "color: red;"} #{product.price_info}
+
+  %aside.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h2.alert.alert-info{style: "font-size: 14px;color: #666;"} 羽毛球装备 - 热销推荐
+    - @products.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+          %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product.title.split.join}
+            %br
+            %span.small{style: "color: red;"} #{product.price_info}
+
+= render partial: "layouts/footer"
