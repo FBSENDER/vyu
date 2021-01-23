@@ -24,9 +24,7 @@
           参考价格：#{@product.price_info}
         %p.small
           店铺：
-          %a{href: "https://www.iquan.net/dianpu/jd_#{@info["shop_id"]}/", target: "_blank"} #{@info["shop_title"]}
-          #{" - "}
-          %a{href: "https://www.uuhaodian.com/jdshop_go/#{@info["shop_id"]}/", rel: "nofollow", target: "_blank"} 进店看看
+          %a{href: "https://www.uuhaodian.com/jshop_#{@info["shop_id"]}.html", target: "_blank"} #{@info["shop_title"]}
 
         - unless @product.brand.empty?
           %p.small
