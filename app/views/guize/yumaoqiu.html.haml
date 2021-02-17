@@ -267,15 +267,11 @@
           相当于BG65的升级版本，看产品描述工艺更厉害的样子，弹性更好，击球速度更快，当然要更贵，价格在70元/根左右。
           %br
           3. 大家可以选择尝试不同弹性系数的羽线，随着技术与经验的增长，总会找到一款适合自己的。
-        %h2.page-header 羽毛球装备推荐
-        - @related.each do |product|
-          .col-md-6.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
-            %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
-              %p{style: "overflow:hidden;height:60px;color: #666;"}
-                #{product.title.split.join}
-                %br
-                %span.small{style: "color: red;"} #{product.price_info}
+        %h2.page-header 羽毛球比赛规则视频讲解 - 单打规则
+        %iframe{src: "https://www.ixigua.com/iframe/6652701538202419725?autoplay=0&startTime=0", style: "width: 100%;height: 360px", frameborder: "0"}
+        %h2.page-header 羽毛球比赛规则视频讲解 - 双打规则
+        %iframe{src: "https://www.ixigua.com/iframe/6386412776255914497?autoplay=0&startTime=3", style: "width: 100%;height: 360px", frameborder: "0"}
+
       %div#toTop ^
       .page-header
       - unless @robot
@@ -298,6 +294,17 @@
               - @links.each do |link|
                 %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
                 %br
+
+
+        %h3.page-header 羽毛球装备推荐
+        - @related.each do |product|
+          .col-md-6.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+            %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+              %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+              %p{style: "overflow:hidden;height:60px;color: #666;"}
+                #{product.title.split.join}
+                %br
+                %span.small{style: "color: red;"} #{product.price_info}
 
 
     = render partial: "layouts/related_right"
