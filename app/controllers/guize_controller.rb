@@ -8,7 +8,8 @@ class GuizeController < ApplicationController
     #@articles = Article.where(status: 1).select(:id,:title).sample(10)
     @links = Link.where(status: 1).to_a
     ids = [21..35].to_a + [36..277].sample(25)
-    @related = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url)
+    #@related = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url)
+    @related = YProduct.where(id: ids).select(:id, :dtitle, :actualPrice, :mainPic)
   end
   def login
     data = {:is_login => 1, :user => {:img_url => "http://photo.pic.sohu.com/images/oldblog/person/11111.gif", :nickname => "羽毛球爱好者", :user_id => "1", :profile_url => "http://www.vxixi.com", :sign => "TR2dgMfO71XkmW34lkMTdIMylQY="}}

@@ -1,6 +1,21 @@
 require 'jd'
 class JdController < ApplicationController
   
+  def dtk_product
+    @product = YProduct.where(id: params[:id].to_i).take
+    not_found if @product.nil?
+    @related = YProduct.where("id > ?", @product.id).select(:id, :dtitle, :mainPic, :actualPrice).order(:id).limit(20)
+    @products = show_product_list
+  end
+
+  def dtk_shop
+    @shop = YShop.where(sellerId: params[:id].to_i).take
+    not_found if @shop.nil?
+    @related = YProduct.where("sellerId = ?", @shop.sellerId).select(:id, :dtitle, :mainPic, :actualPrice).order(:id).limit(20)
+    @products = show_product_list
+    @shops = YShop.where("id > ?", @shop.id).select(:sellerId, :shopName, :shopLogo).order(:id).limit(8)
+  end
+
   def static_product
     @product = YmqProduct.where(id: params[:id].to_i).take
     not_found if @product.nil?

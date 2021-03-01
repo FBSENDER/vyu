@@ -299,12 +299,12 @@
         %h3.page-header 羽毛球装备推荐
         - @related.each do |product|
           .col-md-6.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
-            %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
-              %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+            %a{href: "/yp/#{product.id}.html", title: "#{product.dtitle}"}
+              %img{src: "#{product.mainPic}", alt: "#{product.dtitle}", style: "width:100%;padding: 20px;"}
               %p{style: "overflow:hidden;height:60px;color: #666;"}
-                #{product.title.split.join}
+                #{product.dtitle}
                 %br
-                %span.small{style: "color: red;"} #{product.price_info}
+                %span.small{style: "color: red;"} #{product.actualPrice}元
 
 
     = render partial: "layouts/related_right"

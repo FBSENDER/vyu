@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get "/yumaoqiu_fenlei/:fenlei", to: "jd#static_product_fenlei"
   get "/yumaoqiu_pinpai/:pinpai", to: "jd#static_product_pinpai"
 
+  get "/yp/:id.html", to: "jd#dtk_product"
+  get "/ys/:id.html", to: "jd#dtk_shop"
+
   get "/app/video", to: "app#video"
   get "/app/tag/:name", to: "app#tag"
 

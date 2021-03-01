@@ -1,0 +1,96 @@
+- title(@product.dtitle)
+- head_desc("#{@product.dtitle} - #{@product.desc} - 羽毛球比赛规则")
+- keywords("#{@product.dtitle},羽毛球")
+- path(request.path)
+- mobile_url("http://www.vxixi.com#{request.path}")
+
+.container{style: "margin-top: -20px;"}
+  .row{style: "background-color: #fff;margin-bottom:2px;"}
+    .col-md-12
+      %nav{style: "padding: 20px 0;"}
+        %a{href: "/", title: "羽毛球比赛规则"} 首页
+        &nbsp;>&nbsp;
+        %a{href: "/yumaoqiu_fenlei/#{URI.encode_www_form_component("羽毛球")}/"} 羽毛球
+        &nbsp;>&nbsp;
+        #{@product.dtitle}
+
+  %article.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h1.page-header{style: "font-size:14px;color:#666;overflow:hidden;"} #{@product.dtitle}
+      .alert.alert-info
+        %p.small 
+          #{@product.brandName}推荐：#{@product.dtitle}
+        %p.small
+          本月销量：#{@product.monthSales}件
+        %p.small
+          参考价格：#{@product.actualPrice}元
+        %p.small
+          今日活动：优惠券#{@product.couponPrice}元
+        %p.small
+          店铺：
+          %a{href: "/ys/#{@product.sellerId}.html"} #{@product.shopName}
+
+        - unless @product.brandName.empty?
+          %p.small
+            品牌：
+            #{@product.brandName}
+
+      %p.small.text-right
+        %a.btn.btn-sm.btn-primary{href: "#", rel: "nofollow", target: "_blank"} 去淘宝购买
+      %div{style: "margin: 20px auto;width: 100%;text-align:center;"}
+        %img{src: "#{@product.mainPic}", alt: "#{@product.dtitle}", style: "max-width:300px;"}
+      .alert.alert-success
+        %p 
+          %b 推荐理由：
+          - if @product.desc.empty?
+            %p #{@product.title}
+          - else
+            %p #{@product.desc}
+
+      %p.alert.alert-info{style: "font-size: 14px;color: #666;"}
+        商品图片详情
+        %span{style: "float:right"} 
+          %a#more-btn{href: "javascript:;"}展开内容+
+      #pics.sno{style: "margin: 20px auto;width: 100%;text-align:center;"}
+        %div{style: "margin: 0auto;width: 100%;text-align:center;"}
+          %img{src: "#{@product.mainPic}", alt: "#{@product.title}_图片", style: "max-width:500px;width: 100%;"}
+
+  %aside.row{style: "background-color: #fff;"}
+    .col-md-12
+      %h2.alert.alert-info{style: "font-size: 14px;color: #666;"} 更多推荐
+    - @related.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yp/#{product.id}.html", title: "#{product.dtitle}"}
+          %img{src: "#{product.mainPic}", alt: "#{product.dtitle}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product.dtitle}
+            %br
+            %span.small{style: "color: red;"} #{product.actualPrice}元
+
+    .col-md-12
+      %h2.alert.alert-info{style: "font-size: 14px;color: #666;"} 羽毛球装备 - 热销推荐
+    - @products.each do |product|
+      .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+        %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+          %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+          %p{style: "overflow:hidden;height:60px;color: #666;"}
+            #{product.title.split.join}
+            %br
+            %span.small{style: "color: red;"} #{product.price_info}
+
+= render partial: "layouts/footer"
+
+:javascript
+  var more_open = false;
+  $("#more-btn").click(function(){
+    if(more_open){
+      more_open = !more_open;
+      $("#pics").addClass("sno");
+      $("#more-btn").html("展开内容+");
+    }
+    else{
+      more_open = !more_open;
+      $("#pics").removeClass("sno");
+      $("#more-btn").html("收起内容-");
+    }
+  });
