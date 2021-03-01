@@ -24,8 +24,9 @@
           本月销量：#{@product.monthSales}件
         %p.small
           参考价格：#{@product.actualPrice}元
-        %p.small
-          今日活动：优惠券#{@product.couponPrice}元
+        - if @product.couponPrice > 0
+          %p.small
+            今日活动：优惠券#{@product.couponPrice}元
         %p.small
           店铺：
           %a{href: "/ys/#{@product.sellerId}.html"} #{@product.shopName}
