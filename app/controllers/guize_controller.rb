@@ -6,6 +6,13 @@ class GuizeController < ApplicationController
     redirect_pc_to_mobile
     @robot = is_robot?
     #@articles = Article.where(status: 1).select(:id,:title).sample(10)
+    if @robot
+      file = Rails.root.join("public").join("home.html")
+      if File.exists?(file) && !params[:is_refresh]
+        render inline: File.read(file), layout: nil
+        return
+      end
+    end
     @links = Link.where(status: 1).to_a
     ids = [21..35].to_a + [36..277].sample(25)
     #@related = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url)
