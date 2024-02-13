@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get "/article/:id/update", to: "article#update"
   post "/article/publish", to: "article#publish"
 
+  get "/answer/", to: "answer#index"
+  get "/answer/:id", to: "answer#show"
+
   get "/yumaoqiu/:id.html", to: "jd#static_product"
   get "/yumaoqiu_fenlei/:fenlei", to: "jd#static_product_fenlei"
   get "/yumaoqiu_pinpai/:pinpai", to: "jd#static_product_pinpai"

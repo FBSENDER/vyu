@@ -41,7 +41,7 @@ class JdController < ApplicationController
 
   private
   def show_product_list
-    ids = [21..35].to_a + [36..277].sample(25)
+    ids = (21..35).to_a + (36..277).to_a.sample(25)
     YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url)
   end
 end

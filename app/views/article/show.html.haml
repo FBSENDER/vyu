@@ -1,6 +1,8 @@
 - title "#{@article.title}"
 - keywords "#{@article.keywords}"
 - head_desc "#{@article.description}"
+- path(@path)
+- mobile_url("http://www.vxixi.com#{@path}")
 
 %section.container
   .row
