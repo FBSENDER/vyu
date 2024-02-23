@@ -1,0 +1,45 @@
+- title "#{@answer.title}"
+- keywords "#{@answer.title}"
+- head_desc "#{@answer.title}"
+- path(@path)
+- mobile_url("http://www.vxixi.com#{@path}")
+
+%section.container
+  .row
+    .col-md-2.hidden-sm.hidden-xs
+      .affix{style: "word-wrap: break-word; width: 160px"}
+        %div{style:"border:1px solid #e5e5e5;padding:5px;background-color:#f7f7f7"}
+          %p
+            %a{href: "/tw/answer/"} 羽毛球 Q&A
+          - @articles.each do |article|
+            %p.small
+              %a{href: "/tw/answer/#{article.id}/"} #{article.title}
+    %article.col-md-8.col-sm-12
+      = @answer.html.html_safe
+      .col-md-12
+      - @products.each do |product|
+        .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
+          %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
+            %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+            %p{style: "overflow:hidden;height:60px;color: #666;"}
+              #{product.title.split.join}
+              %br
+              %span.small{style: "color: red;"} #{product.price_info}
+      .clearfix
+
+      .page-header
+      %p.desc
+        - if @pre
+          %a{href: "/tw/answer/#{@pre.id}/"}  Pre：#{@pre.title}
+          %br
+        - if @next
+          %a{href: "/tw/answer/#{@next.id}/"} Next：#{@next.title}
+
+      #toTop ^
+      .page-header
+      #SOHUCS
+      %script{id: "changyan_mobile_js", type: "text/javascript", charset: "utf-8"}
+      .page-header
+
+    %aside
+      = render partial: "layouts/ad_right_tw" 

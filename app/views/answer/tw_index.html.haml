@@ -1,0 +1,22 @@
+- title "羽毛球問答"
+- keywords "羽毛球問答"
+- head_desc "這裡匯集了羽球各方面的技巧、戰術、注意事項。 它每天更新。 歡迎羽球愛好者查看留言。"
+- path("/tw/answer/")
+- mobile_url("http://www.vxixi.com/tw/answer/")
+
+%section.container
+  .row
+    %article.col-md-10
+      %h1.title.hide 羽毛球問答
+      - @articles.each do |article|
+        .row
+          .col-md-12
+            %a{href: "/tw/answer/#{article.id}/", title: "#{article.title}"}
+              %h2.title #{article.title}
+      #toTop ^
+      .page-header
+      #SOHUCS
+      .page-header
+
+    %aside
+      = render partial: "layouts/ad_right_tw" 

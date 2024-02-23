@@ -1,4 +1,5 @@
 require 'jd'
+require 'en_answer'
 class AnswerController < ApplicationController
   def index
     @articles = Answer.where(status: 1).select(:id,:title).to_a
