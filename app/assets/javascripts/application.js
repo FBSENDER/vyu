@@ -16,7 +16,6 @@
 // require turbolinks
 // require_tree .
 //= require article
-//= require changyan
 //= require guize
 //= require lazyload
 
