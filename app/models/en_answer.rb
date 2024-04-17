@@ -13,3 +13,6 @@ end
 class EsAnswer < ApplicationRecord
   self.table_name = 'bd_es_answers'
 end
+class EnProduct < ApplicationRecord
+  self.table_name = 'bd_en_products'
+end

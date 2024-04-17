@@ -33,8 +33,13 @@ class AnswerController < ApplicationController
     @articles = s.sample(10)
     @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
     @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
-    ids = (1..277).to_a.sample(16)
-    @products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
+    #ids = (1..277).to_a.sample(16)
+    #@products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
+    if @answer.product_ids
+      @products = EnProduct.where(id: @answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
+    else
+      @products = []
+    end
     render layout: "application_en"
   end
 
