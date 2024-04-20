@@ -19,12 +19,12 @@
       .col-md-12
       - @products.each do |product|
         .col-md-3.col-sm-6.col-xs-6{style: "background-color: #fff;border: 1px solid #eee;"}
-          %a{href: "/yumaoqiu/#{product.id}.html", title: "#{product.title}"}
-            %img{src: "#{product.pic_url}", alt: "#{product.title.split.join}", style: "width:100%;padding: 20px;"}
+          %a{href: "javascript:;", title: "#{product.title}", onclick: "open_product_link(#{product.source_id});"}
+            %img{src: "#{product.pic}", alt: "#{product.title}", style: "width:100%;padding: 20px;"}
             %p{style: "overflow:hidden;height:60px;color: #666;"}
-              #{product.title.split.join}
+              #{product.title}
               %br
-              %span.small{style: "color: red;"} #{product.price_info}
+              %span.small{style: "color: red;"} $#{product.o_price}
       .clearfix
 
       .page-header
@@ -42,3 +42,8 @@
 
     %aside
       = render partial: "layouts/ad_right_es" 
+
+:javascript
+  var open_product_link = function(id){
+    window.open("http://c.zhequan.cc/e_detail/" + id, "_blank").focus();
+  };

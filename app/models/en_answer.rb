@@ -16,3 +16,6 @@ end
 class EnProduct < ApplicationRecord
   self.table_name = 'bd_en_products'
 end
+class EsProduct < ApplicationRecord
+  self.table_name = 'bd_es_products'
+end
