@@ -57,8 +57,12 @@ class AnswerController < ApplicationController
     @articles = s.sample(10)
     @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
     @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
-    ids = (1..277).to_a.sample(16)
-    @products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
+    en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
+    if en_answer && en_answer.product_ids
+      @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
+    else
+      @products = []
+    end
     render layout: "application_tw"
   end
 
@@ -76,8 +80,12 @@ class AnswerController < ApplicationController
     @articles = s.sample(10)
     @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
     @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
-    ids = (1..277).to_a.sample(16)
-    @products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
+    en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
+    if en_answer && en_answer.product_ids
+      @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
+    else
+      @products = []
+    end
     render layout: "application_ja"
   end
 
@@ -95,8 +103,12 @@ class AnswerController < ApplicationController
     @articles = s.sample(10)
     @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
     @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
-    ids = (1..277).to_a.sample(16)
-    @products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
+    en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
+    if en_answer && en_answer.product_ids
+      @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
+    else
+      @products = []
+    end
     render layout: "application_id"
   end
 
