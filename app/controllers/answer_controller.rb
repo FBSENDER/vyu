@@ -20,7 +20,7 @@ class AnswerController < ApplicationController
   end
 
   def en_index
-    @articles = EnAnswer.where(status: 1).select(:id,:title).to_a
+    @articles = EnAnswer.where(status: 1).select(:id,:title).order("id desc").limit(100).to_a
     @is_robot = is_robot?
     render layout: "application_en"
   end
@@ -29,10 +29,9 @@ class AnswerController < ApplicationController
     not_found if @answer.nil?
     @path = "#{request.path}/"
     @is_robot = is_robot?
-    s =  EnAnswer.where(status: 1).select(:id,:title).to_a
-    @articles = s.sample(10)
-    @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
-    @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
+    @articles =  EnAnswer.where("status = 1 and id >= ?", @answer.id - 1).select(:id,:title).limit(10).to_a
+    @next = @articles.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = @articles.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
     #ids = (1..277).to_a.sample(16)
     #@products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
     if @answer.product_ids
@@ -44,7 +43,7 @@ class AnswerController < ApplicationController
   end
 
   def tw_index
-    @articles = TwAnswer.where(status: 1).select(:id,:title).to_a
+    @articles = TwAnswer.where(status: 1).select(:id,:title).order("id desc").limit(100).to_a
     @is_robot = is_robot?
     render layout: "application_tw"
   end
@@ -53,10 +52,9 @@ class AnswerController < ApplicationController
     not_found if @answer.nil?
     @path = "#{request.path}/"
     @is_robot = is_robot?
-    s =  TwAnswer.where(status: 1).select(:id,:title).to_a
-    @articles = s.sample(10)
-    @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
-    @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
+    @articles =  TwAnswer.where("status = 1 and id >= ?", @answer.id - 1).select(:id,:title).limit(10).to_a
+    @next = @articles.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = @articles.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
     en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
     if en_answer && en_answer.product_ids
       @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
@@ -67,7 +65,7 @@ class AnswerController < ApplicationController
   end
 
   def ja_index
-    @articles = JaAnswer.where(status: 1).select(:id,:title).to_a
+    @articles = JaAnswer.where(status: 1).select(:id,:title).order("id desc").limit(100).to_a
     @is_robot = is_robot?
     render layout: "application_ja"
   end
@@ -76,10 +74,9 @@ class AnswerController < ApplicationController
     not_found if @answer.nil?
     @path = "#{request.path}/"
     @is_robot = is_robot?
-    s =  JaAnswer.where(status: 1).select(:id,:title).to_a
-    @articles = s.sample(10)
-    @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
-    @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
+    @articles =  JaAnswer.where("status = 1 and id >= ?", @answer.id - 1).select(:id,:title).limit(10).to_a
+    @next = @articles.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = @articles.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
     en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
     if en_answer && en_answer.product_ids
       @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
@@ -90,7 +87,7 @@ class AnswerController < ApplicationController
   end
 
   def id_index
-    @articles = IdAnswer.where(status: 1).select(:id,:title).to_a
+    @articles = IdAnswer.where(status: 1).select(:id,:title).order("id desc").limit(100).to_a
     @is_robot = is_robot?
     render layout: "application_id"
   end
@@ -99,10 +96,9 @@ class AnswerController < ApplicationController
     not_found if @answer.nil?
     @path = "#{request.path}/"
     @is_robot = is_robot?
-    s =  IdAnswer.where(status: 1).select(:id,:title).to_a
-    @articles = s.sample(10)
-    @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
-    @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
+    @articles =  IdAnswer.where("status = 1 and id >= ?", @answer.id - 1).select(:id,:title).limit(10).to_a
+    @next = @articles.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = @articles.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
     en_answer = EnAnswer.where("id > ? and status = 1",@answer.id).select(:id, :product_ids).take
     if en_answer && en_answer.product_ids
       @products = EnProduct.where(id: en_answer.product_ids.split(",")).select(:id, :source_id, :title, :pic, :o_price, :source_id).limit(20)
@@ -113,7 +109,7 @@ class AnswerController < ApplicationController
   end
 
   def es_index
-    @articles = EsAnswer.where(status: 1).select(:id,:title).to_a
+    @articles = EsAnswer.where(status: 1).select(:id,:title).order("id desc").limit(100).to_a
     @is_robot = is_robot?
     render layout: "application_es"
   end
@@ -122,10 +118,9 @@ class AnswerController < ApplicationController
     not_found if @answer.nil?
     @path = "#{request.path}/"
     @is_robot = is_robot?
-    s =  EsAnswer.where(status: 1).select(:id,:title).to_a
-    @articles = s.sample(10)
-    @next = s.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
-    @pre = s.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
+    @articles =  EsAnswer.where("status = 1 and id >= ?", @answer.id - 1).select(:id,:title).limit(10).to_a
+    @next = @articles.select{|item| item.id > @answer.id}.sort{|a,b| a.id <=> b.id}.first
+    @pre = @articles.select{|item| item.id < @answer.id}.sort{|a,b| b.id <=> a.id}.first
     #ids = (1..277).to_a.sample(16)
     #@products = YmqProduct.where(id: ids).select(:id, :title, :price_info, :pic_url).take(8)
     if @answer.product_ids
